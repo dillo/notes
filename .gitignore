@@ -11,6 +11,7 @@
 
 # misc
 .DS_Store
+serverless-notes.md
 
 # sst build output
 .build
