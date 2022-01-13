@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import { useHistory } from "react-router-dom";
-import LoaderButton from "../components/LoaderButton";
+
+import { Auth } from "aws-amplify";
+
 import { useAppContext } from "../lib/contextLib";
 import { useFormFields } from "../lib/hooksLib";
 import { onError } from "../lib/errorLib";
-import "./Signup.css";
-import { Auth } from "aws-amplify";
+
+import LoaderButton from "../components/LoaderButton";
+
+import "./css/Signup.css";
 
 export default function Signup() {
   const [fields, handleFieldChange] = useFormFields({
@@ -38,12 +42,12 @@ export default function Signup() {
     setIsLoading(true);
 
     try {
-      const newUser = await Auth.signUp({
+      const aUser = await Auth.signUp({
         username: fields.email,
         password: fields.password,
       });
       setIsLoading(false);
-      setNewUser(newUser);
+      setNewUser(aUser);
     } catch (e) {
       onError(e);
       setIsLoading(false);

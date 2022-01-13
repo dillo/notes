@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "react-bootstrap/Navbar";
-import "./App.css";
-import Routes from "./Routes";
 import Nav from "react-bootstrap/Nav";
 import { LinkContainer } from "react-router-bootstrap";
-import { AppContext } from "./lib/contextLib";
-import { Auth } from "aws-amplify";
 import { useHistory } from "react-router-dom";
+
+import { Auth } from "aws-amplify";
+
+import Routes from "./Routes";
+
+import { AppContext } from "./lib/contextLib";
 import { onError } from "./lib/errorLib";
+
 import ErrorBoundary from "./components/ErrorBoundary";
+
+import "./App.css";
 
 function App() {
   const history = useHistory();

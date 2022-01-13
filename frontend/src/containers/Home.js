@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import ListGroup from "react-bootstrap/ListGroup";
-import { useAppContext } from "../lib/contextLib";
-import { onError } from "../lib/errorLib";
-import "./Home.css";
-import { API } from "aws-amplify";
 import { BsPencilSquare } from "react-icons/bs";
 import { LinkContainer } from "react-router-bootstrap";
+
+import { API } from "aws-amplify";
+
+import { onError } from "../lib/errorLib";
+import { useAppContext } from "../lib/contextLib";
+
+import "./css/Home.css";
 
 export default function Home() {
   const [notes, setNotes] = useState([]);

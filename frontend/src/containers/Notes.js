@@ -1,12 +1,17 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { API, Storage } from "aws-amplify";
-import { onError } from "../lib/errorLib";
 import Form from "react-bootstrap/Form";
-import LoaderButton from "../components/LoaderButton";
+
+import { API, Storage } from "aws-amplify";
+
 import config from "../config";
-import "./Notes.css";
+
+import { onError } from "../lib/errorLib";
 import { s3Upload } from "../lib/awsLib";
+
+import LoaderButton from "../components/LoaderButton";
+
+import "./css/Notes.css";
 
 export default function Notes() {
   const [isLoading, setIsLoading] = useState(false);

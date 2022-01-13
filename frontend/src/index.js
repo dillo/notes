@@ -1,12 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
+
 import { Amplify } from 'aws-amplify';
+
 import config from './config';
+import reportWebVitals from './reportWebVitals';
+
 import { initSentry } from './lib/errorLib';
+
+import App from './App';
+
+import './index.css';
 
 initSentry();
 

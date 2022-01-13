@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import { API } from "aws-amplify";
 import { useHistory } from "react-router-dom";
-import { onError } from "../lib/errorLib";
-import config from "../config";
-import { loadStripe } from "@stripe/stripe-js";
+
 import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+
+import config from "../config";
+
+import { onError } from "../lib/errorLib";
+
 import BillingForm from "../components/BillingForm";
-import "./Settings.css";
+
+import "./css/Settings.css";
 
 export default function Settings() {
   const history = useHistory();

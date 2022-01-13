@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Redirect, useLocation } from "react-router-dom";
+
 import { useAppContext } from "../lib/contextLib";
 
 export default function AuthenticatedRoute({ children, ...rest }) {
