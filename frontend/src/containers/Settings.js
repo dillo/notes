@@ -4,10 +4,10 @@ import { LinkContainer } from "react-router-bootstrap";
 
 import { API } from "aws-amplify";
 
+import config from "../config";
+
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-
-import config from "../config";
 
 import { onError } from "../lib/errorLib";
 
@@ -52,12 +52,12 @@ export default function Settings() {
   return (
     <div className="Settings">
       <LinkContainer to="/settings/email">
-        <LoaderButton block bsSize="large">
+        <LoaderButton block bssize="large">
           Change Email
         </LoaderButton>
       </LinkContainer>
       <LinkContainer to="/settings/password">
-        <LoaderButton block bsSize="large">
+        <LoaderButton block bssize="large">
           Change Password
         </LoaderButton>
       </LinkContainer>
