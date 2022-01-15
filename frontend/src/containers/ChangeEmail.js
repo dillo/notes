@@ -67,7 +67,7 @@ export default function ChangeEmail() {
   function renderUpdateForm() {
     return (
       <form onSubmit={handleUpdateClick}>
-        <FormGroup bsSize="large" controlId="email">
+        <FormGroup bssize="large" controlId="email">
           <FormLabel>Email</FormLabel>
           <FormControl
             autoFocus
@@ -79,7 +79,7 @@ export default function ChangeEmail() {
         <LoaderButton
           block
           type="submit"
-          bsSize="large"
+          bssize="large"
           isLoading={isSendingCode}
           disabled={!validateEmailForm()}
         >
@@ -92,7 +92,7 @@ export default function ChangeEmail() {
   function renderConfirmationForm() {
     return (
       <form onSubmit={handleConfirmClick}>
-        <FormGroup bsSize="large" controlId="code">
+        <FormGroup bssize="large" controlId="code">
           <FormLabel>Confirmation Code</FormLabel>
           <FormControl
             autoFocus
@@ -107,7 +107,7 @@ export default function ChangeEmail() {
         <LoaderButton
           block
           type="submit"
-          bsSize="large"
+          bssize="large"
           isLoading={isConfirming}
           disabled={!validateConfirmForm()}
         >

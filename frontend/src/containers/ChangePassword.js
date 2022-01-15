@@ -50,7 +50,7 @@ export default function ChangePassword() {
   return (
     <div className="ChangePassword">
       <form onSubmit={handleChangeClick}>
-        <FormGroup bsSize="large" controlId="oldPassword">
+        <FormGroup bssize="large" controlId="oldPassword">
           <FormLabel>Old Password</FormLabel>
           <FormControl
             type="password"
@@ -59,7 +59,7 @@ export default function ChangePassword() {
           />
         </FormGroup>
         <hr />
-        <FormGroup bsSize="large" controlId="password">
+        <FormGroup bssize="large" controlId="password">
           <FormLabel>New Password</FormLabel>
           <FormControl
             type="password"
@@ -67,7 +67,7 @@ export default function ChangePassword() {
             value={fields.password}
           />
         </FormGroup>
-        <FormGroup bsSize="large" controlId="confirmPassword">
+        <FormGroup bssize="large" controlId="confirmPassword">
           <FormLabel>Confirm Password</FormLabel>
           <FormControl
             type="password"
@@ -78,7 +78,7 @@ export default function ChangePassword() {
         <LoaderButton
           block
           type="submit"
-          bsSize="large"
+          bssize="large"
           disabled={!validateForm()}
           isLoading={isChanging}
         >
