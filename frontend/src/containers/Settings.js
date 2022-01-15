@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { API } from "aws-amplify";
 import { useHistory } from "react-router-dom";
+import { LinkContainer } from "react-router-bootstrap";
+
+import { API } from "aws-amplify";
 
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
@@ -10,6 +12,7 @@ import config from "../config";
 import { onError } from "../lib/errorLib";
 
 import BillingForm from "../components/BillingForm";
+import LoaderButton from "../components/LoaderButton";
 
 import "./css/Settings.css";
 
@@ -48,6 +51,17 @@ export default function Settings() {
 
   return (
     <div className="Settings">
+      <LinkContainer to="/settings/email">
+        <LoaderButton block bsSize="large">
+          Change Email
+        </LoaderButton>
+      </LinkContainer>
+      <LinkContainer to="/settings/password">
+        <LoaderButton block bsSize="large">
+          Change Password
+        </LoaderButton>
+      </LinkContainer>
+      <hr />
       <Elements
         stripe={stripePromise}
         fonts={[
