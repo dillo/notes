@@ -22,12 +22,16 @@ export default function ChangeEmail() {
   const [fields, handleFieldChange] = useFormFields({
     code: "",
     email: "",
+    confirmEmail: "",
   });
   const [isConfirming, setIsConfirming] = useState(false);
   const [isSendingCode, setIsSendingCode] = useState(false);
 
   function validateEmailForm() {
-    return fields.email.length > 0;
+    return (
+      fields.email.length > 0 &&
+      fields.email === fields.confirmEmail
+    )
   }
 
   function validateConfirmForm() {
@@ -68,11 +72,19 @@ export default function ChangeEmail() {
     return (
       <form onSubmit={handleUpdateClick}>
         <FormGroup bssize="large" controlId="email">
-          <FormLabel>Email</FormLabel>
+          <FormLabel>New Email</FormLabel>
           <FormControl
             autoFocus
             type="email"
             value={fields.email}
+            onChange={handleFieldChange}
+          />
+        </FormGroup>
+        <FormGroup bssize="large" controlId="confirmEmail">
+          <FormLabel>Confirm New Email</FormLabel>
+          <FormControl
+            type="email"
+            value={fields.confirmEmail}
             onChange={handleFieldChange}
           />
         </FormGroup>
