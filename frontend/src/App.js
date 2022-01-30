@@ -21,21 +21,21 @@ const App = () => {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
 
   useEffect(() => {
+    const onLoad = async () => {
+      try {
+        await Auth.currentSession();
+        userHasAuthenticated(true);
+      }
+      catch(e) {
+        if (e !== 'No current user') {
+          onError(e);
+        }
+      }
+      setIsAuthenticating(false);
+    }
+
     onLoad();
   }, []);
-
-  const onLoad = async () => {
-    try {
-      await Auth.currentSession();
-      userHasAuthenticated(true);
-    }
-    catch(e) {
-      if (e !== 'No current user') {
-        onError(e);
-      }
-    }
-    setIsAuthenticating(false);
-  }
 
   const handleLogout = async () => {
     await Auth.signOut();

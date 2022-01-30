@@ -23,28 +23,28 @@ const Notes = () => {
   const [content, setContent] = useState("");
 
   useEffect(() => {
+    const loadNote = () => {
+      return API.get("notes", `/notes/${id}`);
+    }
+
+    const onLoad = async () => {
+      try {
+        const note = await loadNote();
+        const { content, attachment } = note;
+
+        if (attachment) {
+          note.attachmentURL = await Storage.vault.get(attachment);
+        }
+
+        setContent(content);
+        setNote(note);
+      } catch (e) {
+        onError(e);
+      }
+    }
+
     onLoad();
   }, [id]);
-
-  const loadNote = () => {
-    return API.get("notes", `/notes/${id}`);
-  }
-
-  const onLoad = async () => {
-    try {
-      const note = await loadNote();
-      const { content, attachment } = note;
-
-      if (attachment) {
-        note.attachmentURL = await Storage.vault.get(attachment);
-      }
-
-      setContent(content);
-      setNote(note);
-    } catch (e) {
-      onError(e);
-    }
-  }
 
   const validateForm = () => {
     return content.length > 0;

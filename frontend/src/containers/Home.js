@@ -16,23 +16,23 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    const onLoad = async () => {
+      if (!isAuthenticated) {
+        return;
+      }
+
+      try {
+        const myNotes = await loadNotes();
+        setNotes(myNotes);
+      } catch (e) {
+        onError(e);
+      }
+
+      setIsLoading(false);
+    }
+
     onLoad();
   }, [isAuthenticated]);
-
-  const onLoad = async () => {
-    if (!isAuthenticated) {
-      return;
-    }
-
-    try {
-      const myNotes = await loadNotes();
-      setNotes(myNotes);
-    } catch (e) {
-      onError(e);
-    }
-
-    setIsLoading(false);
-  }
 
   const loadNotes = () => { return API.get("notes", "/notes"); }
 
