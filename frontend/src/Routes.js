@@ -15,7 +15,7 @@ import ChangeEmail from "./containers/ChangeEmail";
 import AuthenticatedRoute from "./components/AuthenticatedRoute";
 import UnauthenticatedRoute from "./components/UnauthenticatedRoute";
 
-export default function Routes() {
+const Routes = () => {
   return (
     <Switch>
       <Route exact path="/">
@@ -51,3 +51,5 @@ export default function Routes() {
     </Switch>
   );
 }
+
+export default Routes;
