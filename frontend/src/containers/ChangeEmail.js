@@ -16,7 +16,7 @@ import { Auth } from "aws-amplify";
 
 import "./css/ChangeEmail.css";
 
-export default function ChangeEmail() {
+const ChangeEmail = () => {
   const history = useHistory();
   const [codeSent, setCodeSent] = useState(false);
   const [fields, handleFieldChange] = useFormFields({
@@ -27,20 +27,19 @@ export default function ChangeEmail() {
   const [isConfirming, setIsConfirming] = useState(false);
   const [isSendingCode, setIsSendingCode] = useState(false);
 
-  function validateEmailForm() {
+  const validateEmailForm = () => {
     return (
       fields.email.length > 0 &&
       fields.email === fields.confirmEmail
     )
   }
 
-  function validateConfirmForm() {
+  const validateConfirmForm = () => {
     return fields.code.length > 0;
   }
 
-  async function handleUpdateClick(event) {
+  const handleUpdateClick = async (event) => {
     event.preventDefault();
-
     setIsSendingCode(true);
 
     try {
@@ -53,14 +52,12 @@ export default function ChangeEmail() {
     }
   }
 
-  async function handleConfirmClick(event) {
+  const handleConfirmClick = async (event) => {
     event.preventDefault();
-
     setIsConfirming(true);
 
     try {
       await Auth.verifyCurrentUserAttributeSubmit("email", fields.code);
-
       history.push("/settings");
     } catch (error) {
       onError(error);
@@ -68,7 +65,7 @@ export default function ChangeEmail() {
     }
   }
 
-  function renderUpdateForm() {
+  const renderUpdateForm = () => {
     return (
       <form onSubmit={handleUpdateClick}>
         <FormGroup bssize="large" controlId="email">
@@ -101,7 +98,7 @@ export default function ChangeEmail() {
     );
   }
 
-  function renderConfirmationForm() {
+  const renderConfirmationForm = () => {
     return (
       <form onSubmit={handleConfirmClick}>
         <FormGroup bssize="large" controlId="code">
@@ -135,3 +132,5 @@ export default function ChangeEmail() {
     </div>
   );
 }
+
+export default ChangeEmail;
