@@ -12,7 +12,7 @@ import LoaderButton from "../components/LoaderButton";
 
 import "./css/Login.css";
 
-export default function Login() {
+const Login = () => {
   const { userHasAuthenticated } = useAppContext();
   const [isLoading, setIsLoading] = useState(false);
   const [fields, handleFieldChange] = useFormFields({
@@ -20,13 +20,12 @@ export default function Login() {
     password: ""
   });
 
-  function validateForm() {
+  const validateForm = () => {
     return fields.email.length > 0 && fields.password.length > 0;
   }
 
-  async function handleSubmit(event) {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-
     setIsLoading(true);
 
     try {
@@ -72,3 +71,5 @@ export default function Login() {
     </div>
   );
 }
+
+export default Login;

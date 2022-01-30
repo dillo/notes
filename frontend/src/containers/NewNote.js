@@ -13,21 +13,21 @@ import LoaderButton from "../components/LoaderButton";
 
 import "./css/NewNote.css";
 
-export default function NewNote() {
+const NewNote = () => {
   const file = useRef(null);
   const history = useHistory();
   const [content, setContent] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  function validateForm() {
+  const validateForm = () => {
     return content.length > 0;
   }
 
-  function handleFileChange(event) {
+  const handleFileChange = (event) => {
     file.current = event.target.files[0];
   }
 
-  async function handleSubmit(event) {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (file.current && file.current.size > config.MAX_ATTACHMENT_SIZE) {
@@ -38,7 +38,6 @@ export default function NewNote() {
       );
       return;
     }
-
     setIsLoading(true);
 
     try {
@@ -52,7 +51,7 @@ export default function NewNote() {
     }
   }
 
-  function createNote(note) {
+  const createNote = (note) => {
     return API.post("notes", "/notes", {
       body: note
     });
@@ -86,3 +85,5 @@ export default function NewNote() {
     </div>
   );
 }
+
+export default NewNote;
