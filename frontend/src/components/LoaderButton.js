@@ -4,12 +4,12 @@ import { BsArrowRepeat } from "react-icons/bs";
 
 import "./css/LoaderButton.css";
 
-export default function LoaderButton({
+const LoaderButton = ({
   isLoading,
   className = "",
   disabled = false,
   ...props
-}) {
+}) => {
   return (
     <Button
       disabled={disabled || isLoading}
@@ -21,3 +21,5 @@ export default function LoaderButton({
     </Button>
   );
 }
+
+export default LoaderButton;

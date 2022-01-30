@@ -3,9 +3,10 @@ import { Route, Redirect, useLocation } from "react-router-dom";
 
 import { useAppContext } from "../lib/contextLib";
 
-export default function AuthenticatedRoute({ children, ...rest }) {
+const AuthenticatedRoute = ({ children, ...rest }) => {
   const { pathname, search } = useLocation();
   const { isAuthenticated } = useAppContext();
+
   return (
     <Route {...rest}>
       {isAuthenticated ? (
@@ -18,3 +19,5 @@ export default function AuthenticatedRoute({ children, ...rest }) {
     </Route>
   );
 }
+
+export default AuthenticatedRoute;

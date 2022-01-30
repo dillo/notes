@@ -10,35 +10,33 @@ import { useAppContext } from "../lib/contextLib";
 
 import "./css/Home.css";
 
-export default function Home() {
+const Home = () => {
   const [notes, setNotes] = useState([]);
   const { isAuthenticated } = useAppContext();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    async function onLoad() {
-      if (!isAuthenticated) {
-        return;
-      }
-
-      try {
-        const myNotes = await loadNotes();
-        setNotes(myNotes);
-      } catch (e) {
-        onError(e);
-      }
-
-      setIsLoading(false);
-    }
-
     onLoad();
   }, [isAuthenticated]);
 
-  function loadNotes() {
-    return API.get("notes", "/notes");
+  const onLoad = async () => {
+    if (!isAuthenticated) {
+      return;
+    }
+
+    try {
+      const myNotes = await loadNotes();
+      setNotes(myNotes);
+    } catch (e) {
+      onError(e);
+    }
+
+    setIsLoading(false);
   }
 
-  function renderNotesList(myNotes) {
+  const loadNotes = () => { return API.get("notes", "/notes"); }
+
+  const renderNotesList = (notes) => {
     return (
       <>
         <LinkContainer to="/notes/new">
@@ -64,7 +62,7 @@ export default function Home() {
     );
   }
 
-  function renderLander() {
+  const renderLander = () => {
     return (
       <div className="lander">
         <h1>Scratch</h1>
@@ -73,7 +71,7 @@ export default function Home() {
     );
   }
 
-  function renderNotes() {
+  const renderNotes = () => {
     return (
       <div className="notes">
         <h2 className="pb-3 mt-4 mb-3 border-bottom">Your Notes</h2>
@@ -88,3 +86,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default Home;

@@ -10,7 +10,7 @@ import { Auth } from "aws-amplify";
 
 import "./css/ChangePassword.css";
 
-export default function ChangePassword() {
+const ChangePassword = () => {
   const history = useHistory();
   const [fields, handleFieldChange] = useFormFields({
     password: "",
@@ -19,7 +19,7 @@ export default function ChangePassword() {
   });
   const [isChanging, setIsChanging] = useState(false);
 
-  function validateForm() {
+  const validateForm = () => {
     return (
       fields.oldPassword.length > 0 &&
       fields.password.length > 0 &&
@@ -27,9 +27,8 @@ export default function ChangePassword() {
     );
   }
 
-  async function handleChangeClick(event) {
+  const handleChangeClick = async (event) => {
     event.preventDefault();
-
     setIsChanging(true);
 
     try {
@@ -39,7 +38,6 @@ export default function ChangePassword() {
         fields.oldPassword,
         fields.password
       );
-
       history.push("/settings");
     } catch (error) {
       onError(error);
@@ -88,3 +86,5 @@ export default function ChangePassword() {
     </div>
   );
 }
+
+export default ChangePassword;

@@ -4,7 +4,7 @@ import config from "../config";
 
 const isLocal = process.env.NODE_ENV === "development";
 
-export function initSentry() {
+export const initSentry = () => {
   if (isLocal) {
     return;
   }
@@ -14,7 +14,7 @@ export function initSentry() {
   });
 }
 
-export function logError(error, errorInfo = null) {
+export const logError = (error, errorInfo = null) => {
   if (isLocal) {
     return;
   }
@@ -25,7 +25,7 @@ export function logError(error, errorInfo = null) {
   });
 }
 
-export function onError(error) {
+export const onError = (error) => {
   let errorInfo = {};
   let message = error.toString();
 
@@ -38,8 +38,6 @@ export function onError(error) {
   } else if (error.config && error.config.url) {
     errorInfo.url = error.config.url;
   }
-
   logError(error, errorInfo);
-
   alert(message);
 }

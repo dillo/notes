@@ -15,7 +15,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 
 import "./App.css";
 
-function App() {
+const App = () => {
   const history = useHistory();
   const [isAuthenticating, setIsAuthenticating] = useState(true);
   const [isAuthenticated, userHasAuthenticated] = useState(false);
@@ -24,7 +24,7 @@ function App() {
     onLoad();
   }, []);
 
-  async function onLoad() {
+  const onLoad = async () => {
     try {
       await Auth.currentSession();
       userHasAuthenticated(true);
@@ -34,20 +34,41 @@ function App() {
         onError(e);
       }
     }
-
     setIsAuthenticating(false);
   }
 
-  async function handleLogout() {
+  const handleLogout = async () => {
     await Auth.signOut();
-
     userHasAuthenticated(false);
-
     history.push("/login");
   }
 
-  return (
-    !isAuthenticating && (
+  const authenticatedNav = () => {
+    return (
+      <>
+        <LinkContainer to="/settings">
+          <Nav.Link>Settings</Nav.Link>
+        </LinkContainer>
+        <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+      </>
+    );
+  }
+
+  const unauthenticatedNav = () => {
+    return (
+      <>
+        <LinkContainer to="/signup">
+          <Nav.Link>Signup</Nav.Link>
+        </LinkContainer>
+        <LinkContainer to="/login">
+          <Nav.Link>Login</Nav.Link>
+        </LinkContainer>
+      </>
+    );
+  }
+
+  const main = () => {
+    return (
       <div className="App container py-3">
         <Navbar collapseOnSelect bg="light" expand="md" className="mb-3">
           <LinkContainer to="/">
@@ -58,23 +79,7 @@ function App() {
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
             <Nav activeKey={window.location.pathname}>
-              {isAuthenticated ? (
-                <>
-                  <LinkContainer to="/settings">
-                    <Nav.Link>Settings</Nav.Link>
-                  </LinkContainer>
-                  <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
-                </>
-              ) : (
-                <>
-                  <LinkContainer to="/signup">
-                    <Nav.Link>Signup</Nav.Link>
-                  </LinkContainer>
-                  <LinkContainer to="/login">
-                    <Nav.Link>Login</Nav.Link>
-                  </LinkContainer>
-                </>
-              )}
+              {isAuthenticated ? authenticatedNav() : unauthenticatedNav()}
             </Nav>
           </Navbar.Collapse>
         </Navbar>
@@ -84,8 +89,10 @@ function App() {
           </AppContext.Provider>
         </ErrorBoundary>
       </div>
-    )
-  );
+    );
+  }
+
+  return (!isAuthenticating && main());
 }
 
 export default App;

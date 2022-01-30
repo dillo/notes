@@ -13,7 +13,7 @@ import LoaderButton from "../components/LoaderButton";
 
 import "./css/Notes.css";
 
-export default function Notes() {
+const Notes = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const file = useRef(null);
@@ -23,48 +23,48 @@ export default function Notes() {
   const [content, setContent] = useState("");
 
   useEffect(() => {
-    function loadNote() {
-      return API.get("notes", `/notes/${id}`);
-    }
-
-    async function onLoad() {
-      try {
-        const note = await loadNote();
-        const { content, attachment } = note;
-
-        if (attachment) {
-          note.attachmentURL = await Storage.vault.get(attachment);
-        }
-
-        setContent(content);
-        setNote(note);
-      } catch (e) {
-        onError(e);
-      }
-    }
-
     onLoad();
   }, [id]);
 
-  function validateForm() {
+  const loadNote = () => {
+    return API.get("notes", `/notes/${id}`);
+  }
+
+  const onLoad = async () => {
+    try {
+      const note = await loadNote();
+      const { content, attachment } = note;
+
+      if (attachment) {
+        note.attachmentURL = await Storage.vault.get(attachment);
+      }
+
+      setContent(content);
+      setNote(note);
+    } catch (e) {
+      onError(e);
+    }
+  }
+
+  const validateForm = () => {
     return content.length > 0;
   }
 
-  function formatFilename(str) {
+  const formatFilename = (str) => {
     return str.replace(/^\w+-/, "");
   }
 
-  function handleFileChange(event) {
+  const handleFileChange = (event) => {
     file.current = event.target.files[0];
   }
 
-  function saveNote(note) {
+  const saveNote = (note) => {
     return API.put("notes", `/notes/${id}`, {
       body: note
     });
   }
 
-  async function handleSubmit(event) {
+  const handleSubmit = async (event) => {
     let attachment;
 
     event.preventDefault();
@@ -77,7 +77,6 @@ export default function Notes() {
       );
       return;
     }
-
     setIsLoading(true);
 
     try {
@@ -96,11 +95,11 @@ export default function Notes() {
     }
   }
 
-  function deleteNote() {
+  const deleteNote = () => {
     return API.del("notes", `/notes/${id}`);
   }
 
-  async function handleDelete(event) {
+  const handleDelete = async (event) => {
     event.preventDefault();
 
     const confirmed = window.confirm(
@@ -110,7 +109,6 @@ export default function Notes() {
     if (!confirmed) {
       return;
     }
-
     setIsDeleting(true);
 
     try {
@@ -171,3 +169,5 @@ export default function Notes() {
     </div>
   );
 }
+
+export default Notes;
