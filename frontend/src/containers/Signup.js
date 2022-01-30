@@ -12,7 +12,7 @@ import LoaderButton from "../components/LoaderButton";
 
 import "./css/Signup.css";
 
-export default function Signup() {
+const Signup = () => {
   const [fields, handleFieldChange] = useFormFields({
     email: "",
     password: "",
@@ -24,7 +24,7 @@ export default function Signup() {
   const { userHasAuthenticated } = useAppContext();
   const [isLoading, setIsLoading] = useState(false);
 
-  function validateForm() {
+  const validateForm = () => {
     return (
       fields.email.length > 0 &&
       fields.password.length > 0 &&
@@ -32,13 +32,12 @@ export default function Signup() {
     );
   }
 
-  function validateConfirmationForm() {
+  const validateConfirmationForm = () => {
     return fields.confirmationCode.length > 0;
   }
 
-  async function handleSubmit(event) {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-
     setIsLoading(true);
 
     try {
@@ -54,15 +53,13 @@ export default function Signup() {
     }
   }
 
-  async function handleConfirmationSubmit(event) {
+  const handleConfirmationSubmit = async (event) => {
     event.preventDefault();
-
     setIsLoading(true);
 
     try {
       await Auth.confirmSignUp(fields.email, fields.confirmationCode);
       await Auth.signIn(fields.email, fields.password);
-
       userHasAuthenticated(true);
       history.push("/");
     } catch (e) {
@@ -71,7 +68,7 @@ export default function Signup() {
     }
   }
 
-  function renderConfirmationForm() {
+  const renderConfirmationForm = () => {
     return (
       <Form onSubmit={handleConfirmationSubmit}>
         <Form.Group controlId="confirmationCode" size="lg">
@@ -98,7 +95,7 @@ export default function Signup() {
     );
   }
 
-  function renderForm() {
+  const renderForm = () => {
     return (
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="email" size="lg">
@@ -146,3 +143,5 @@ export default function Signup() {
     </div>
   );
 }
+
+export default Signup;

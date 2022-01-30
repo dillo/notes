@@ -16,7 +16,7 @@ import LoaderButton from "../components/LoaderButton";
 
 import "./css/Settings.css";
 
-export default function Settings() {
+const Settings = () => {
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
   const stripePromise = loadStripe(config.STRIPE_KEY);
@@ -27,12 +27,11 @@ export default function Settings() {
     });
   }
 
-  async function handleFormSubmit(storage, { token, error }) {
+  const handleFormSubmit = async (storage, { token, error }) => {
     if (error) {
       onError(error);
       return;
     }
-
     setIsLoading(true);
 
     try {
@@ -40,7 +39,6 @@ export default function Settings() {
         storage,
         source: token.id,
       });
-
       alert("Your card has been charged successfully!");
       history.push("/");
     } catch (e) {
@@ -76,3 +74,5 @@ export default function Settings() {
     </div>
   );
 }
+
+export default Settings;

@@ -17,7 +17,7 @@ import LoaderButton from "../components/LoaderButton";
 
 import "./css/ResetPassword.css";
 
-export default function ResetPassword() {
+const ResetPassword = () => {
   const [fields, handleFieldChange] = useFormFields({
     code: "",
     email: "",
@@ -29,11 +29,11 @@ export default function ResetPassword() {
   const [isConfirming, setIsConfirming] = useState(false);
   const [isSendingCode, setIsSendingCode] = useState(false);
 
-  function validateCodeForm() {
+  const validateCodeForm = () => {
     return fields.email.length > 0;
   }
 
-  function validateResetForm() {
+  const validateResetForm = () => {
     return (
       fields.code.length > 0 &&
       fields.password.length > 0 &&
@@ -41,9 +41,8 @@ export default function ResetPassword() {
     );
   }
 
-  async function handleSendCodeClick(event) {
+  const handleSendCodeClick = async (event) => {
     event.preventDefault();
-
     setIsSendingCode(true);
 
     try {
@@ -55,9 +54,8 @@ export default function ResetPassword() {
     }
   }
 
-  async function handleConfirmClick(event) {
+  const handleConfirmClick = async (event) => {
     event.preventDefault();
-
     setIsConfirming(true);
 
     try {
@@ -73,7 +71,7 @@ export default function ResetPassword() {
     }
   }
 
-  function renderRequestCodeForm() {
+  const renderRequestCodeForm = () => {
     return (
       <form onSubmit={handleSendCodeClick}>
         <FormGroup bssize="large" controlId="email">
@@ -98,7 +96,7 @@ export default function ResetPassword() {
     );
   }
 
-  function renderConfirmationForm() {
+  const renderConfirmationForm = () => {
     return (
       <form onSubmit={handleConfirmClick}>
         <FormGroup bssize="large" controlId="code">
@@ -143,7 +141,7 @@ export default function ResetPassword() {
     );
   }
 
-  function renderSuccessMessage() {
+  const renderSuccessMessage = () => {
     return (
       <div className="success">
         <p><BsCheck size={16} /> Your password has been reset.</p>
@@ -166,3 +164,5 @@ export default function ResetPassword() {
     </div>
   );
 }
+
+export default ResetPassword;
