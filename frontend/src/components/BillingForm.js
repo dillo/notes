@@ -8,7 +8,7 @@ import LoaderButton from "./LoaderButton";
 
 import "./css/BillingForm.css";
 
-export default function BillingForm({ isLoading, onSubmit }) {
+const BillingForm = ({ isLoading, onSubmit }) => {
   const stripe = useStripe();
   const elements = useElements();
   const [fields, handleFieldChange] = useFormFields({
@@ -20,7 +20,7 @@ export default function BillingForm({ isLoading, onSubmit }) {
 
   isLoading = isProcessing || isLoading;
 
-  function validateForm() {
+  const validateForm = () => {
     return (
       stripe &&
       elements &&
@@ -30,7 +30,7 @@ export default function BillingForm({ isLoading, onSubmit }) {
     );
   }
 
-  async function handleSubmitClick(event) {
+  const handleSubmitClick = async (event) => {
     event.preventDefault();
 
     if (!stripe || !elements) {
@@ -38,15 +38,12 @@ export default function BillingForm({ isLoading, onSubmit }) {
       // form submission until Stripe.js has loaded.
       return;
     }
-
     setIsProcessing(true);
 
     const cardElement = elements.getElement(CardElement);
-
     const { token, error } = await stripe.createToken(cardElement);
 
     setIsProcessing(false);
-
     onSubmit(fields.storage, { token, error });
   }
 
@@ -98,3 +95,5 @@ export default function BillingForm({ isLoading, onSubmit }) {
     </Form>
   );
 }
+
+export default BillingForm;
